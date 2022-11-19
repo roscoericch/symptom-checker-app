@@ -94,22 +94,22 @@ const Test = () => {
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img6} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Isaac Teddy</h3>
+              <p>Lead Product Designer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img7} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Odinaka Chris</h3>
+              <p>Marketer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img0} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Evelyn Itta</h3>
+              <p>Frontend Developer</p>
             </div>
           </div>
         </div>
