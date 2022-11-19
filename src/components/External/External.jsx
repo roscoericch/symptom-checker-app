@@ -18,10 +18,10 @@ const Test = () => {
       </div>
       <div className="w-4/5 text-center m-auto">
         <div className="relative m-auto inline-block mb-[1rem]">
-          <h5 className="text-[3rem] m-auto text-[#04172A] pb-[2px]">
+          <h5 className="text-[1.5rem] md:text-[3rem] m-auto text-[#04172A]">
             Our story
           </h5>
-          <span className="absolute h-[2px] w-[7rem] bg-[#D2120F] bottom-0 right-0"></span>
+          <span className="absolute h-[2px] w-[3rem] md:w-[7rem] bg-[#D2120F] bottom-0 right-0"></span>
         </div>
         <p className="text-md text-[#464646] mb-3">
           LoveMe is an organization under ZuriNG, with an interesting history
@@ -50,64 +50,64 @@ const Test = () => {
           lover.
         </p>
         <div className="relative m-auto inline-block mb-[1rem]">
-          <h5 className="text-[3rem] m-auto text-[#04172A] pb-[2px]">
+          <h5 className="text-[1.5rem] md:text-[3rem] m-auto text-[#04172A]">
             Meet the Team
           </h5>
-          <span className="absolute h-[2px] w-[7rem] bg-[#D2120F] bottom-0 right-0"></span>
+          <span className="absolute h-[2px] w-[3rem] md:w-[7rem] bg-[#D2120F] bottom-0 right-0"></span>
         </div>
-        <div className="grid grid-cols-1 justify-items-center content-center md:grid-cols-4 sm:grid-cols-3 min-[320px]:grid-cols-2 gap-2 md:gap-4 m-auto">
+        <div className="grid grid-cols-1 justify-items-center content-center md:grid-cols-4 sm:grid-cols-2 gap-2 md:gap-4 m-auto">
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img1} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Mark Essien</h3>
               <p>CEO</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img2} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Root Wranju</h3>
               <p>Project Manager</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img3} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Jade Olamide</h3>
               <p>Project Manager</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img4} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Elektra Success</h3>
               <p>Product designer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img5} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Peter Felix</h3>
               <p>Product Designer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img6} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Isaac Teddy</h3>
               <p>Lead Product Designer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img7} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Odinaka Chris</h3>
               <p>Marketer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img0} />
-            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[10px] border-2 text-[#fff] text-sm">
               <h3>Evelyn Itta</h3>
               <p>Frontend Developer</p>
             </div>
