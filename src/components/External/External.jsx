@@ -35,7 +35,7 @@ const Test = () => {
         other in a unique way that will always trigger your love for your lover.
       </p>
       <h5 className="text-lg m-auto pb-1">Meet the Team</h5>
-      <div className="grid grid-cols-1 justify-items-center content-center md:grid-cols-4 sm:grid-cols-3 min-[320px]:grid-cols-2 gap-2 m-auto">
+      <div className="grid grid-cols-1 justify-items-center content-center md:grid-cols-4 sm:grid-cols-3 min-[320px]:grid-cols-2 gap-2 md:gap-4 m-auto">
         <div>
           <img className="h-60 rounded-xl" src={Img1} />
           <h5 className="absolute top-0 bottom-0"></h5>
