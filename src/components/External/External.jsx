@@ -66,29 +66,29 @@ const Test = () => {
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img2} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Root Wranju</h3>
+              <p>Project Manager</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img3} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Jade Olamide</h3>
+              <p>Project Manager</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img4} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Elektra Success</h3>
+              <p>Product designer</p>
             </div>
           </div>
           <div className="relative">
             <img className="h-60 w-[248px] rounded-xl" src={Img5} />
             <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
-              <h3>Mark Essien</h3>
-              <p>CEO</p>
+              <h3>Peter Felix</h3>
+              <p>Product Designer</p>
             </div>
           </div>
           <div className="relative">
