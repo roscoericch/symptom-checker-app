@@ -56,37 +56,61 @@ const Test = () => {
           <span className="absolute h-[2px] w-[7rem] bg-[#D2120F] bottom-0 right-0"></span>
         </div>
         <div className="grid grid-cols-1 justify-items-center content-center md:grid-cols-4 sm:grid-cols-3 min-[320px]:grid-cols-2 gap-2 md:gap-4 m-auto">
-          <div>
-            <img className="h-60 rounded-xl" src={Img1} />
-            <h5 className="absolute top-0 bottom-0"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img1} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img2} />
-            <h5 className="absolute top-0 bottom-0"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img2} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img3} />
-            <h5 className="absolute top-0 bottom-0 rounded-md"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img3} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img4} />
-            <h5 className="absolute top-0 bottom-0 tounded"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img4} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img5} />
-            <h5 className="absolute top-0 bottom-0"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img5} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img6} />
-            <h5 className="absolute top-0 bottom-0"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img6} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img7} />
-            <h5 className="absolute top-0 bottom-0"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img7} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
-          <div>
-            <img className="h-60 rounded-xl" src={Img0} />
-            <h5 className="absolute top-0 bottom-0"></h5>
+          <div className="relative">
+            <img className="h-60 w-[248px] rounded-xl" src={Img0} />
+            <div className="absolute bottom-0 left-0 backdrop-blur-[6px] p-[1rem] border-2 text-[#fff]">
+              <h3>Mark Essien</h3>
+              <p>CEO</p>
+            </div>
           </div>
         </div>
       </div>
