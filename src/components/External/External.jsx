@@ -9,8 +9,8 @@ import Img0 from "../../assets/Rectangle376.jpg";
 const Test = () => {
   return (
     <div className="w-4/5 text-center m-auto">
-      <h5 className="m-auto text-[#04172A] mb-1">Our story</h5>
-      <p className="text-sm text-[#464646] mb-3">
+      <h5 className="text-lg m-auto text-[#04172A] mb-1">Our story</h5>
+      <p className="text-md text-[#464646] mb-3">
         LoveMe is an organization under ZuriNG, with an interesting history and
         the ability to meet people’s needs for last longing love. It all started
         in the year 2020 when a group of friends decided to create a website
@@ -18,7 +18,7 @@ const Test = () => {
         intelligence to generate lettersthat sounded like they were written by a
         real person. Our company has come a long way since then.
       </p>
-      <p className="text-sm text-[#464646] mb-3">
+      <p className="text-md text-[#464646] mb-3">
         Today, LoveMe is one of the most popular websites in the world for
         generating love lettters. We have helped millions of people express
         their love for each other. we are located in Nigeria, but our team are
@@ -26,7 +26,7 @@ const Test = () => {
         about their work and we love helping people express their love for each
         other in a unique way that will always trigger your love for your lover.
       </p>
-      <p className="text-sm text-[#464646] mb-3">
+      <p className="text-md text-[#464646] mb-3">
         Today, LoveMe is one of the most popular websites in the world for
         generating love lettters. We have helped millions of people express
         their love for each other. we are located in Nigeria, but our team are
@@ -34,8 +34,8 @@ const Test = () => {
         about their work and we love helping people express their love for each
         other in a unique way that will always trigger your love for your lover.
       </p>
-      <h5 className="m-auto pb-1">Meet the Team</h5>
-      <div className="grid grid-cols-1 justify-center align-center md:grid-cols-4 sm:grid-cols-3 min-[320px]:grid-cols-2 gap-4 m-auto">
+      <h5 className="text-lg m-auto pb-1">Meet the Team</h5>
+      <div className="grid grid-cols-1 justify-items-center content-center md:grid-cols-4 sm:grid-cols-3 min-[320px]:grid-cols-2 gap-2 m-auto">
         <div>
           <img className="h-60 rounded-xl" src={Img1} />
           <h5 className="absolute top-0 bottom-0"></h5>
