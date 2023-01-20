@@ -1,48 +1,56 @@
-import React from "react";
 import axios from "axios";
 import "./symptoms.scss";
 import { useContext } from "react";
 import { DataContext } from "../../contexts/contexts";
-
-import Input from "@mui/material/Input";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import { GiCancel } from "react-icons/gi";
 const Symptoms = () => {
-  const [searchSymptoms, setSearchSymptoms] = useState("");
   const {
-    demoSymptoms,
-    selectedSymptoms,
-    AddSelectedSymptoms,
+    store,
+    getSymptoms,
+    getProposedSymptoms,
+    getDiagnosis,
+    addSelectedSymptoms,
     deleteSelectedSymptoms,
-    diagnosis,
-    GetDiagnosis,
   } = useContext(DataContext);
-  const [filteredSymptoms, setfilteredSymptoms] = useState(demoSymptoms);
+  useStore();
+  const [filteredSymptoms, setfilteredSymptoms] = useState([]);
+  const [searchSymptoms, setSearchSymptoms] = useState("");
   useEffect(() => {
-    const newfilteredSymptoms = demoSymptoms.filter((symptoms) =>
-      symptoms.Name.toLocaleLowerCase().includes(searchSymptoms)
-    );
-    setfilteredSymptoms(newfilteredSymptoms);
-  }, [demoSymptoms, searchSymptoms]);
+    console.log("useEffect");
+    if (store.symptoms.length < 1) {
+      getSymptoms().then(() => {
+        setfilteredSymptoms(store.symptoms);
+      });
+      return;
+    }
+    setfilteredSymptoms(store.symptoms);
+  }, [store]);
 
   const onSearchChange = (event) => {
     const searchString = event.target.value.toLocaleLowerCase();
     setSearchSymptoms(searchString);
+    const newfilteredSymptoms = store.symptoms.filter((symptoms) =>
+      symptoms.Name.toLocaleLowerCase().includes(searchString)
+    );
+    setfilteredSymptoms(newfilteredSymptoms);
   };
   return (
     <div>
       <input
         placeholder="SearchSymptoms"
         type="search"
+        value={searchSymptoms}
         onChange={onSearchChange}
       />
       <div className="symptoms">
         {filteredSymptoms.map((e) => (
           <div
             key={e.ID}
-            onClick={() => {
-              AddSelectedSymptoms(e);
+            onClick={async () => {
+              addSelectedSymptoms(e);
+              // console.log(state);
             }}
           >
             {e.Name}
@@ -50,18 +58,22 @@ const Symptoms = () => {
         ))}
       </div>
       <div className="selectedSymptoms">
-        {selectedSymptoms.map((e) => (
-          <div className="selectedSymptom" key={e.symptom.ID}>
+        {store.selectedSymptoms.map((e, i) => (
+          <div className="selectedSymptom" key={`${i}ee`}>
             <span>{e.symptom.Name}</span>
             <span>{e.redFlag}</span>
             <GiCancel onClick={() => deleteSelectedSymptoms(e)} />
           </div>
         ))}
       </div>
-      <Button onClick={GetDiagnosis} variant="contained" color="secondary">
+      <Button
+        onClick={() => getDiagnosis(store.selectedSymptoms)}
+        variant="contained"
+        color="secondary"
+      >
         Get Diagnosis
       </Button>
-      <div>{diagnosis}</div>
+      <div>{store?.diagnosis}</div>
     </div>
   );
 };
