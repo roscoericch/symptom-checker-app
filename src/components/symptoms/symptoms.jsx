@@ -14,7 +14,6 @@ const Symptoms = () => {
     addSelectedSymptoms,
     deleteSelectedSymptoms,
   } = useContext(DataContext);
-  useStore();
   const [filteredSymptoms, setfilteredSymptoms] = useState([]);
   const [searchSymptoms, setSearchSymptoms] = useState("");
   useEffect(() => {
