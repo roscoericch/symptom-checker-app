@@ -1,6 +1,7 @@
 import axios from "axios";
 import "./symptoms.scss";
-import { useContext } from "react";
+import { symptom } from "../../contexts/contexts";
+import React, { useContext } from "react";
 import { DataContext } from "../../contexts/contexts";
 import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
@@ -14,20 +15,17 @@ const Symptoms = () => {
     addSelectedSymptoms,
     deleteSelectedSymptoms,
   } = useContext(DataContext);
-  const [filteredSymptoms, setfilteredSymptoms] = useState([]);
+  const [filteredSymptoms, setfilteredSymptoms] = useState<Array<symptom> | []>(
+    []
+  );
   const [searchSymptoms, setSearchSymptoms] = useState("");
   useEffect(() => {
     console.log("useEffect");
-    if (store.symptoms.length < 1) {
-      getSymptoms().then(() => {
-        setfilteredSymptoms(store.symptoms);
-      });
-      return;
-    }
+    getSymptoms();
     setfilteredSymptoms(store.symptoms);
-  }, [store]);
+  }, []);
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchString = event.target.value.toLocaleLowerCase();
     setSearchSymptoms(searchString);
     const newfilteredSymptoms = store.symptoms.filter((symptoms) =>
@@ -72,7 +70,7 @@ const Symptoms = () => {
       >
         Get Diagnosis
       </Button>
-      <div>{store?.diagnosis}</div>
+      {/* <div>{store?.diagnosis}</div> */}
     </div>
   );
 };

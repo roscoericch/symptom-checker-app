@@ -1,8 +1,50 @@
 import useApi from "../api/useApi";
-import { createContext, useEffect, useState, useReducer } from "react";
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useReducer,
+  PropsWithChildren,
+} from "react";
+import { type } from "os";
 
-export const DataContext = createContext({
-  store: {},
+export type symptom = {
+  ID: number;
+  Name: string;
+};
+type selectedSymptom = {
+  symptom: symptom;
+  redFlag: string;
+};
+export type dataState = {
+  symptoms: Array<symptom>;
+  selectedSymptoms: Array<selectedSymptom>;
+  diagnosis: Array<Object>;
+};
+type ACTIONTYPE =
+  | { type: "getSymptoms"; payload: Array<symptom> }
+  | { type: "addSelectedSymptom"; payload: selectedSymptom }
+  | { type: "deleteSelectedSymptom"; payload: selectedSymptom }
+  | { type: "updateDiagnosis"; payload: Array<{}> };
+
+const initialState = {
+  symptoms: [],
+  selectedSymptoms: [],
+  diagnosis: [],
+};
+type store = {
+  store: dataState;
+  getDiagnosis: (c: Array<selectedSymptom>) => void;
+  getSymptoms: () => void;
+  getProposedSymptoms: (c: Array<selectedSymptom>) => void;
+  addSelectedSymptoms: (c: symptom) => void;
+  deleteSelectedSymptoms: (c: selectedSymptom) => void;
+};
+type Props = {
+  children: React.ReactNode;
+};
+export const DataContext = createContext<store>({
+  store: initialState,
   getDiagnosis: () => {},
   getSymptoms: () => {},
   getProposedSymptoms: () => {},
@@ -10,13 +52,10 @@ export const DataContext = createContext({
   deleteSelectedSymptoms: () => {},
 });
 
-const initialState = {
-  symptoms: [],
-  selectedSymptoms: [],
-  diagnosis: [],
-};
-
-const storeReducer = (state, action) => {
+const storeReducer = (
+  state: dataState | typeof initialState,
+  action: ACTIONTYPE
+) => {
   switch (action.type) {
     case "getSymptoms":
       return { ...state, symptoms: action.payload };
@@ -36,8 +75,7 @@ const storeReducer = (state, action) => {
       throw new Error("unidentified specified types");
   }
 };
-
-export const DataProvider = ({ children }) => {
+export const DataProvider = ({ children }: Props) => {
   const { sendRequest } = useApi();
   const [store, dispatch] = useReducer(storeReducer, initialState);
   const getSymptoms = async () => {
@@ -48,9 +86,11 @@ export const DataProvider = ({ children }) => {
         )}&format=json&language=en-gb`
       )
       .then((res) => dispatch({ type: "getSymptoms", payload: res.data }));
-    return data;
+    return;
   };
-  const getProposedSymptoms = async (selectedSymptoms) => {
+  const getProposedSymptoms = async (
+    selectedSymptoms: Array<selectedSymptom>
+  ) => {
     const symptomsList = selectedSymptoms.map((e) => e.symptom.ID);
     const symptoms = await sendRequest
       .get(
@@ -61,7 +101,7 @@ export const DataProvider = ({ children }) => {
       .then((res) => res.data);
     dispatch({ type: "getSymptoms", payload: symptoms });
   };
-  const addSelectedSymptoms = async (symptom) => {
+  const addSelectedSymptoms = async (symptom: symptom) => {
     const redFlag = await sendRequest
       .get(
         `https://sandbox-healthservice.priaid.ch/redflag?token=${sessionStorage.getItem(
@@ -76,14 +116,14 @@ export const DataProvider = ({ children }) => {
         });
         console.log(store, symptom);
       });
-    return
+    return;
   };
 
-  const deleteSelectedSymptoms = (selectedSymptom) => {
+  const deleteSelectedSymptoms = (selectedSymptom: selectedSymptom) => {
     dispatch({ type: "deleteSelectedSymptom", payload: selectedSymptom });
   };
 
-  const getDiagnosis = async (selectedSymptoms) => {
+  const getDiagnosis = async (selectedSymptoms: Array<selectedSymptom>) => {
     const SymptomID = selectedSymptoms.map((e) => e.symptom.ID);
     const diagnosis = await sendRequest
       .get(
