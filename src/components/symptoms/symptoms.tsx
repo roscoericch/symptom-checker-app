@@ -1,5 +1,5 @@
-import axios from "axios";
 import "./symptoms.scss";
+import SearchBox from "../../antd/atoms/searchbox";
 import { symptom } from "../../contexts/contexts";
 import React, { useContext } from "react";
 import { DataContext } from "../../contexts/contexts";
@@ -25,8 +25,11 @@ const Symptoms = () => {
     setfilteredSymptoms(store.symptoms);
   }, []);
 
-  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchString = event.target.value.toLocaleLowerCase();
+  const onSearchChange = (
+    value: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const searchString = value;
     setSearchSymptoms(searchString);
     const newfilteredSymptoms = store.symptoms.filter((symptoms) =>
       symptoms.Name.toLocaleLowerCase().includes(searchString)
@@ -35,20 +38,22 @@ const Symptoms = () => {
   };
   return (
     <div>
-      <input
+      {/* <input
         placeholder="SearchSymptoms"
         type="search"
         value={searchSymptoms}
         onChange={onSearchChange}
-      />
-      <div className="symptoms">
-        {filteredSymptoms.map((e) => (
+      /> */}
+      <SearchBox onSearch={onSearchChange} placeholder="Search Symptoms" />
+      <div className="overflow-scroll">
+        {filteredSymptoms.map((e: symptom) => (
           <div
             key={e.ID}
             onClick={async () => {
               addSelectedSymptoms(e);
-              // console.log(state);
+              getProposedSymptoms(store.selectedSymptoms);
             }}
+            className="bg-blue-200 text-center w-[6rem]"
           >
             {e.Name}
           </div>

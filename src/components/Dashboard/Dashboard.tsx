@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { RiMenuFoldFill } from "react-icons/ri";
 import { CiMedicalClipboard } from "react-icons/ci";
@@ -37,10 +37,6 @@ const DashBoard = () => {
                 />
               </div>
             )}
-            {/* {React.createElement(collapsed ? AiOutlineMenuFold : RiMenuFoldFill, {
-            className: "trigger block",
-            onClick: () => setCollapsed(!collapsed),
-          })} */}
           </div>
           <Menu
             theme="dark"
@@ -50,22 +46,22 @@ const DashBoard = () => {
               {
                 key: "1",
                 icon: <CiMedicalClipboard />,
-                label: <div>nav</div>,
+                label: <Link to="/">nav</Link>,
               },
               {
                 key: "2",
                 icon: <IoMdBody />,
-                label: "nav 2",
+                label: <Link to="/bodydiagnosis">nav2</Link>,
               },
               {
                 key: "3",
                 icon: <FaFileMedicalAlt />,
-                label: "nav 3",
+                label: <Link to="/specialisation">nav3</Link>,
               },
               {
                 key: "4",
                 icon: <GiDoctorFace />,
-                label: "nav 4",
+                label: <Link to="/issues">nav4</Link>,
               },
             ]}
           />
