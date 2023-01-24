@@ -37,8 +37,8 @@ type store = {
   getDiagnosis: (c: Array<selectedSymptom>) => void;
   getSymptoms: () => void;
   getProposedSymptoms: (c: Array<selectedSymptom>) => void;
-  addSelectedSymptoms: (c: symptom) => void;
-  deleteSelectedSymptoms: (c: selectedSymptom) => void;
+  addSelectedSymptoms: (c: symptom, store: dataState) => void;
+  deleteSelectedSymptoms: (c: selectedSymptom, store: dataState) => void;
 };
 type Props = {
   children: React.ReactNode;
@@ -101,7 +101,7 @@ export const DataProvider = ({ children }: Props) => {
       .then((res) => res.data);
     dispatch({ type: "getSymptoms", payload: symptoms });
   };
-  const addSelectedSymptoms = async (symptom: symptom) => {
+  const addSelectedSymptoms = async (symptom: symptom, store: dataState) => {
     const redFlag = await sendRequest
       .get(
         `https://sandbox-healthservice.priaid.ch/redflag?token=${sessionStorage.getItem(
@@ -115,21 +115,28 @@ export const DataProvider = ({ children }: Props) => {
           payload: { symptom, redFlag: res.data },
         });
         console.log(store, symptom);
+        return res.data;
       });
+    console.log(store);
+    getProposedSymptoms([...store.selectedSymptoms, { symptom, redFlag }]);
     return;
   };
 
-  const deleteSelectedSymptoms = (selectedSymptom: selectedSymptom) => {
+  const deleteSelectedSymptoms = (
+    selectedSymptom: selectedSymptom,
+    store: dataState
+  ) => {
     dispatch({ type: "deleteSelectedSymptom", payload: selectedSymptom });
+    getProposedSymptoms([...store.selectedSymptoms, selectedSymptom]);
   };
 
   const getDiagnosis = async (selectedSymptoms: Array<selectedSymptom>) => {
     const SymptomID = selectedSymptoms.map((e) => e.symptom.ID);
     const diagnosis = await sendRequest
       .get(
-        `https://sandbox-healthservice.priaid.ch/diagnosis?token=${sessionStorage.getItem(
+        `https://sandbox-healthservice.priaid.ch/diagnosis?symptoms=[${SymptomID}]&gender=male&year_of_birth=1982&token=${sessionStorage.getItem(
           "token"
-        )}&symptoms=[${SymptomID}]&gender=male&year_of_birth=1982&format=json`
+        )}&format=json&language=en-gb`
       )
       .then((res) => res.data);
     dispatch({ type: "updateDiagnosis", payload: diagnosis });
