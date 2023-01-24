@@ -10,7 +10,6 @@ const Symptoms = () => {
   const {
     store,
     getSymptoms,
-    getProposedSymptoms,
     getDiagnosis,
     addSelectedSymptoms,
     deleteSelectedSymptoms,
@@ -21,14 +20,12 @@ const Symptoms = () => {
   const [searchSymptoms, setSearchSymptoms] = useState("");
   useEffect(() => {
     console.log("useEffect");
-    getSymptoms();
-    setfilteredSymptoms(store.symptoms);
+    if (store.symptoms.length < 1) {
+      getSymptoms();
+    }
   }, []);
 
-  const onSearchChange = (
-    value: string,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const onSearchChange = (value: string) => {
     const searchString = value;
     setSearchSymptoms(searchString);
     const newfilteredSymptoms = store.symptoms.filter((symptoms) =>
@@ -45,15 +42,14 @@ const Symptoms = () => {
         onChange={onSearchChange}
       /> */}
       <SearchBox onSearch={onSearchChange} placeholder="Search Symptoms" />
-      <div className="overflow-scroll">
-        {filteredSymptoms.map((e: symptom) => (
+      <div className="overflow-y-scroll h-[70vh] grid grid-cols-1 gap-4">
+        {store.symptoms.map((e: symptom) => (
           <div
             key={e.ID}
             onClick={async () => {
-              addSelectedSymptoms(e);
-              getProposedSymptoms(store.selectedSymptoms);
+              addSelectedSymptoms(e, store);
             }}
-            className="bg-blue-200 text-center w-[6rem]"
+            className="bg-blue-200 max-h-fit max-w-fit rounded-[8px] text-center p-[0.5rem]"
           >
             {e.Name}
           </div>
@@ -64,7 +60,11 @@ const Symptoms = () => {
           <div className="selectedSymptom" key={`${i}ee`}>
             <span>{e.symptom.Name}</span>
             <span>{e.redFlag}</span>
-            <GiCancel onClick={() => deleteSelectedSymptoms(e)} />
+            <GiCancel
+              onClick={() => {
+                deleteSelectedSymptoms(e, store);
+              }}
+            />
           </div>
         ))}
       </div>
