@@ -26,8 +26,7 @@ const Symptoms = () => {
   }, []);
 
   const onSearchChange = (
-    value: string,
-    event: React.ChangeEvent<HTMLInputElement>
+    value: string
   ) => {
     const searchString = value;
     setSearchSymptoms(searchString);
