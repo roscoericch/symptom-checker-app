@@ -6,7 +6,6 @@ import React, {
   useReducer,
   PropsWithChildren,
 } from "react";
-import { type } from "os";
 
 export type symptom = {
   ID: number;
@@ -19,7 +18,7 @@ type selectedSymptom = {
 export type dataState = {
   symptoms: Array<symptom>;
   selectedSymptoms: Array<selectedSymptom>;
-  diagnosis: Array<Object>;
+  diagnosis: Array<Record<string, any>>;
 };
 type ACTIONTYPE =
   | { type: "getSymptoms"; payload: Array<symptom> }
@@ -79,27 +78,43 @@ export const DataProvider = ({ children }: Props) => {
   const { sendRequest } = useApi();
   const [store, dispatch] = useReducer(storeReducer, initialState);
   const getSymptoms = async () => {
+    // const storedData = sessionStorage.getItem("symptoms");
+    // console.log(JSON.parse(storedData));
+    // if (storedData) {
+    //   console.log(JSON.parse(storedData));
+    //   const dataArr = JSON.parse(storedData);
+    //   dispatch({ type: "getSymptoms", payload: dataArr });
+    // } else {
     const data = await sendRequest
       .get(
         `https://sandbox-healthservice.priaid.ch/symptoms?token=${sessionStorage.getItem(
           "token"
         )}&format=json&language=en-gb`
       )
-      .then((res) => dispatch({ type: "getSymptoms", payload: res.data }));
+      .then((res) => {
+        dispatch({ type: "getSymptoms", payload: res.data });
+        sessionStorage.setItem("symptoms", JSON.stringify(res.data));
+      });
     return;
   };
   const getProposedSymptoms = async (
     selectedSymptoms: Array<selectedSymptom>
   ) => {
     const symptomsList = selectedSymptoms.map((e) => e.symptom.ID);
-    const symptoms = await sendRequest
-      .get(
-        `https://sandbox-healthservice.priaid.ch/symptoms/proposed?symptoms=[${symptomsList}]&gender=male&year_of_birth=19&token=${sessionStorage.getItem(
-          "token"
-        )}&format=json&language=en-gb`
-      )
-      .then((res) => res.data);
-    dispatch({ type: "getSymptoms", payload: symptoms });
+    if (symptomsList.length > 0) {
+      const symptoms = await sendRequest
+        .get(
+          `https://sandbox-healthservice.priaid.ch/symptoms/proposed?symptoms=[${symptomsList}]&gender=male&year_of_birth=19&token=${sessionStorage.getItem(
+            "token"
+          )}&format=json&language=en-gb`
+        )
+        .then((res) => res.data);
+      dispatch({ type: "getSymptoms", payload: symptoms });
+      return;
+    } else {
+      getSymptoms();
+      return;
+    }
   };
   const addSelectedSymptoms = async (symptom: symptom, store: dataState) => {
     const redFlag = await sendRequest
@@ -127,7 +142,10 @@ export const DataProvider = ({ children }: Props) => {
     store: dataState
   ) => {
     dispatch({ type: "deleteSelectedSymptom", payload: selectedSymptom });
-    getProposedSymptoms([...store.selectedSymptoms, selectedSymptom]);
+    const selectedSymptoms = store.selectedSymptoms.filter(
+      (e) => e.symptom !== selectedSymptom.symptom
+    );
+    getProposedSymptoms(selectedSymptoms);
   };
 
   const getDiagnosis = async (selectedSymptoms: Array<selectedSymptom>) => {

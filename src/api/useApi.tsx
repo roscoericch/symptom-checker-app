@@ -7,6 +7,8 @@ const useApi = () => {
     // const secret_key = "s2L8Xzk3RJm4i5ZPw";
     // const computedHash = CryptoJS.HmacMD5(uri, secret_key);
     // const computedHashString = computedHash.toString(CryptoJS.enc.Base64);
+    // q6MWr_GMAIL_COM_AUT:so79FLYk4UvDdnhcL5pI9A==
+    // const AUTH_TOKEN = `Bearer sikirurazak1@gmail.com:yMqzKeKsvsI/aiyrU8+Rag==`;
     const AUTH_TOKEN = `Bearer sikirurazak1@gmail.com:yMqzKeKsvsI/aiyrU8+Rag==`;
     axios.defaults.headers.common["Authorization"] = AUTH_TOKEN;
     const res = await axios
