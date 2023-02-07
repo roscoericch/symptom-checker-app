@@ -19,17 +19,20 @@ export type dataState = {
   symptoms: Array<symptom>;
   selectedSymptoms: Array<selectedSymptom>;
   diagnosis: Array<Record<string, any>>;
+  status: string;
 };
 type ACTIONTYPE =
   | { type: "getSymptoms"; payload: Array<symptom> }
   | { type: "addSelectedSymptom"; payload: selectedSymptom }
   | { type: "deleteSelectedSymptom"; payload: selectedSymptom }
-  | { type: "updateDiagnosis"; payload: Array<{}> };
+  | { type: "updateDiagnosis"; payload: Array<{}> }
+  | { type: "status"; payload: string };
 
 const initialState = {
   symptoms: [],
   selectedSymptoms: [],
   diagnosis: [],
+  status: "",
 };
 type store = {
   store: dataState;
@@ -70,6 +73,8 @@ const storeReducer = (
       return { ...state, selectedSymptoms: Arr };
     case "updateDiagnosis":
       return { ...state, diagnosis: action.payload };
+    case "status":
+      return { ...state, status: action.payload };
     default:
       throw new Error("unidentified specified types");
   }
@@ -78,13 +83,6 @@ export const DataProvider = ({ children }: Props) => {
   const { sendRequest } = useApi();
   const [store, dispatch] = useReducer(storeReducer, initialState);
   const getSymptoms = async () => {
-    // const storedData = sessionStorage.getItem("symptoms");
-    // console.log(JSON.parse(storedData));
-    // if (storedData) {
-    //   console.log(JSON.parse(storedData));
-    //   const dataArr = JSON.parse(storedData);
-    //   dispatch({ type: "getSymptoms", payload: dataArr });
-    // } else {
     const data = await sendRequest
       .get(
         `https://sandbox-healthservice.priaid.ch/symptoms?token=${sessionStorage.getItem(
@@ -92,8 +90,10 @@ export const DataProvider = ({ children }: Props) => {
         )}&format=json&language=en-gb`
       )
       .then((res) => {
-        dispatch({ type: "getSymptoms", payload: res.data });
-        sessionStorage.setItem("symptoms", JSON.stringify(res.data));
+        if (res.data) {
+          dispatch({ type: "getSymptoms", payload: res.data });
+          sessionStorage.setItem("symptoms", JSON.stringify(res.data));
+        }
       });
     return;
   };
@@ -129,10 +129,8 @@ export const DataProvider = ({ children }: Props) => {
           type: "addSelectedSymptom",
           payload: { symptom, redFlag: res.data },
         });
-        console.log(store, symptom);
         return res.data;
       });
-    console.log(store);
     getProposedSymptoms([...store.selectedSymptoms, { symptom, redFlag }]);
     return;
   };
@@ -149,6 +147,7 @@ export const DataProvider = ({ children }: Props) => {
   };
 
   const getDiagnosis = async (selectedSymptoms: Array<selectedSymptom>) => {
+    dispatch({ type: "status", payload: "loading" });
     const SymptomID = selectedSymptoms.map((e) => e.symptom.ID);
     const diagnosis = await sendRequest
       .get(
@@ -156,8 +155,12 @@ export const DataProvider = ({ children }: Props) => {
           "token"
         )}&format=json&language=en-gb`
       )
-      .then((res) => res.data);
-    dispatch({ type: "updateDiagnosis", payload: diagnosis });
+      .then((res) => {
+        if (res.data) {
+          dispatch({ type: "updateDiagnosis", payload: res.data });
+          dispatch({ type: "status", payload: "success" });
+        }
+      });
   };
   const value = {
     store,

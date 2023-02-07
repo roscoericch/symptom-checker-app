@@ -1,18 +1,11 @@
 import SearchBox from "../../antd/atoms/searchbox";
 import { symptom } from "../../contexts/contexts";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { DataContext } from "../../contexts/contexts";
-import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
-import { GiCancel } from "react-icons/gi";
+import Spinner from "../../antd/atoms/Spinner";
 const Symptoms = () => {
-  const {
-    store,
-    getSymptoms,
-    getDiagnosis,
-    addSelectedSymptoms,
-    deleteSelectedSymptoms,
-  } = useContext(DataContext);
+  const { store, getSymptoms, addSelectedSymptoms } = useContext(DataContext);
   const [filteredSymptoms, setfilteredSymptoms] = useState<Array<symptom> | []>(
     []
   );
@@ -35,18 +28,20 @@ const Symptoms = () => {
   return (
     <div>
       <SearchBox onSearch={onSearchChange} placeholder="Search Symptoms" />
-      <div className="overflow-y-scroll h-[60vh] grid grid-cols-1 gap-4">
-        {store.symptoms.map((e: symptom) => (
-          <div
-            key={e.ID}
-            onClick={async () => {
-              addSelectedSymptoms(e, store);
-            }}
-            className="bg-blue-200 max-h-full max-w-fit rounded-[8px] text-center p-[0.5rem] cursor-pointer"
-          >
-            {e.Name}
-          </div>
-        ))}
+      <div className="overflow-y-scroll h-full max-h-[65vh]">
+        <div className="grid grid-cols-2 auto-rows-auto gap-4 content-start justify-items-start p-[1rem] rounded-[5px] border-solid border-[1px] border-[#f0f0f0]">
+          {store.symptoms.map((e: symptom) => (
+            <div
+              key={e.ID}
+              onClick={async () => {
+                addSelectedSymptoms(e, store);
+              }}
+              className="bg-blue-200 max-w-fit my-auto rounded-[8px] text-left p-[0.5rem] cursor-pointer"
+            >
+              {e.Name}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
